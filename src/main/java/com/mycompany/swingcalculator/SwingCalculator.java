@@ -4,7 +4,9 @@
  */
 package com.mycompany.swingcalculator;
 
+import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -16,7 +18,16 @@ public class SwingCalculator {
         JFrame jf = new JFrame("Calculator");
         jf.setLayout(null);
         jf.setSize(600,600);
+        jf.setLocation(350, 90); //x,y
+        
+        JLabel displayLabel = new JLabel();
+        displayLabel.setBounds(30, 50, 530, 40);
+        displayLabel.setBackground(Color.LIGHT_GRAY);
+        displayLabel.setOpaque(true);
+        jf.add(displayLabel);
+        
         jf.setVisible(true);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
