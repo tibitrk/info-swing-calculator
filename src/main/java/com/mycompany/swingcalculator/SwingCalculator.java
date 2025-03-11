@@ -6,6 +6,8 @@ package com.mycompany.swingcalculator;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,15 +17,20 @@ import javax.swing.SwingConstants;
  *
  * @author Tibit
  */
-public class SwingCalculator {
+public class SwingCalculator implements ActionListener{
+    
+    JFrame jf;
+    JLabel displayLabel;
+    JButton sevenBtn,eightBtn,nineBtn,fourBtn,fiveBtn,sixBtn,oneBtn,twoBtn,threeBtn,dotBtn,zeroBtn,equalBtn,divisionBtn,
+            minusBtn,mulBtn,plusBtn;
 
     public SwingCalculator() {
-        JFrame jf = new JFrame("Calculator");
+        jf = new JFrame("Calculator");
         jf.setLayout(null);
         jf.setSize(600, 600);
         jf.setLocation(350, 90); //x,y
 
-        JLabel displayLabel = new JLabel();
+        displayLabel = new JLabel();
         displayLabel.setBounds(30, 50, 530, 40);
         displayLabel.setBackground(Color.GRAY);
         displayLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -31,84 +38,100 @@ public class SwingCalculator {
         displayLabel.setOpaque(true);
         jf.add(displayLabel);
 
-        JButton sevenBtn = new JButton("7");
+        sevenBtn = new JButton("7");
         sevenBtn.setBounds(30, 120, 60, 40);
         sevenBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        sevenBtn.addActionListener(this);
         jf.add(sevenBtn);
 
-        JButton eightBtn = new JButton("8");
+        eightBtn = new JButton("8");
         eightBtn.setBounds(100, 120, 60, 40);
         eightBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        eightBtn.addActionListener(this);
         jf.add(eightBtn);
 
-        JButton nineBtn = new JButton("9");
+        nineBtn = new JButton("9");
         nineBtn.setBounds(170, 120, 60, 40);
         nineBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        nineBtn.addActionListener(this);
         jf.add(nineBtn);
 
-        JButton fourBtn = new JButton("4");
+        fourBtn = new JButton("4");
         fourBtn.setBounds(30, 170, 60, 40);
         fourBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        fourBtn.addActionListener(this);
         jf.add(fourBtn);
 
-        JButton fiveBtn = new JButton("5");
+        fiveBtn = new JButton("5");
         fiveBtn.setBounds(100, 170, 60, 40);
         fiveBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        fiveBtn.addActionListener(this);
         jf.add(fiveBtn);
 
-        JButton sixBtn = new JButton("6");
+        sixBtn = new JButton("6");
         sixBtn.setBounds(170, 170, 60, 40);
         sixBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        sixBtn.addActionListener(this);
         jf.add(sixBtn);
 
-        JButton oneBtn = new JButton("1");
+        oneBtn = new JButton("1");
         oneBtn.setBounds(30, 220, 60, 40);
         oneBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        oneBtn.addActionListener(this);
         jf.add(oneBtn);
 
-        JButton twoBtn = new JButton("2");
+        twoBtn = new JButton("2");
         twoBtn.setBounds(100, 220, 60, 40);
         twoBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        twoBtn.addActionListener(this);
         jf.add(twoBtn);
 
-        JButton threeBtn = new JButton("3");
+        threeBtn = new JButton("3");
         threeBtn.setBounds(170, 220, 60, 40);
         threeBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        threeBtn.addActionListener(this);
         jf.add(threeBtn);
 
-        JButton dotBtn = new JButton(".");
+        dotBtn = new JButton(".");
         dotBtn.setBounds(30, 270, 60, 40);
         dotBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        dotBtn.addActionListener(this);
         jf.add(dotBtn);
 
-        JButton zeroBtn = new JButton("0");
+        zeroBtn = new JButton("0");
         zeroBtn.setBounds(100, 270, 60, 40);
         zeroBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        zeroBtn.addActionListener(this);
         jf.add(zeroBtn);
 
-        JButton equalBtn = new JButton("=");
+        equalBtn = new JButton("=");
         equalBtn.setBounds(170, 270, 60, 40);
         equalBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        equalBtn.addActionListener(this);
         jf.add(equalBtn);
 
-        JButton divisionBtn = new JButton("/");
+        divisionBtn = new JButton("/");
         divisionBtn.setBounds(240, 120, 60, 40);
         divisionBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        divisionBtn.addActionListener(this);
         jf.add(divisionBtn);
 
-        JButton mulBtn = new JButton("x");
+        mulBtn = new JButton("x");
         mulBtn.setBounds(240, 170, 60, 40);
         mulBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        mulBtn.addActionListener(this);
         jf.add(mulBtn);
 
-        JButton minusBtn = new JButton("-");
+        minusBtn = new JButton("-");
         minusBtn.setBounds(240, 220, 60, 40);
         minusBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        minusBtn.addActionListener(this);
         jf.add(minusBtn);
 
-        JButton plusBtn = new JButton("+");
+        plusBtn = new JButton("+");
         plusBtn.setBounds(240, 270, 60, 40);
         plusBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        plusBtn.addActionListener(this);
         jf.add(plusBtn);
 
         jf.setVisible(true);
@@ -120,4 +143,58 @@ public class SwingCalculator {
         SwingCalculator c = new SwingCalculator();
 
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        if(e.getSource() == sevenBtn){
+            displayLabel.setText("6");
+        }else if(e.getSource() == eightBtn){
+            displayLabel.setText("8");
+            
+        }else if(e.getSource() == nineBtn){
+            displayLabel.setText("9");
+            
+        }else if(e.getSource() == fourBtn){
+            displayLabel.setText("4");
+            
+        }else if(e.getSource() == fiveBtn){
+            displayLabel.setText("5");
+            
+        }else if(e.getSource() == sixBtn){
+            displayLabel.setText("6");
+            
+        }else if(e.getSource() == oneBtn){
+            displayLabel.setText("1");
+            
+        }else if(e.getSource() == twoBtn){
+            displayLabel.setText("2");
+            
+        }else if(e.getSource() == threeBtn){
+            displayLabel.setText("3");
+            
+        }else if(e.getSource() == dotBtn){
+            displayLabel.setText(".");
+            
+        }else if(e.getSource() == zeroBtn){
+            displayLabel.setText("0");
+            
+        }else if(e.getSource() == equalBtn){
+            displayLabel.setText("=");
+            
+        }else if(e.getSource() == divisionBtn){
+            displayLabel.setText("/");
+            
+        }else if(e.getSource() == mulBtn){
+            displayLabel.setText("x");
+            
+        }else if(e.getSource() == minusBtn){
+            displayLabel.setText("-");
+            
+        }else if(e.getSource() == plusBtn){
+            displayLabel.setText("+");
+            
+        }
+        
+      }
 }
