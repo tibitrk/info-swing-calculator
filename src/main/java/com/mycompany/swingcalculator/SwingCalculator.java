@@ -22,7 +22,7 @@ public class SwingCalculator implements ActionListener{
     JFrame jf;
     JLabel displayLabel;
     JButton sevenBtn,eightBtn,nineBtn,fourBtn,fiveBtn,sixBtn,oneBtn,twoBtn,threeBtn,dotBtn,zeroBtn,equalBtn,divisionBtn,
-            minusBtn,mulBtn,plusBtn;
+            minusBtn,mulBtn,plusBtn,clearBtn;
 
     public SwingCalculator() {
         jf = new JFrame("Calculator");
@@ -133,6 +133,12 @@ public class SwingCalculator implements ActionListener{
         plusBtn.setFont(new Font("Arial", Font.PLAIN,25));
         plusBtn.addActionListener(this);
         jf.add(plusBtn);
+        
+        clearBtn = new JButton("Clear");
+        clearBtn.setBounds(30, 330, 270, 40);
+        clearBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        clearBtn.addActionListener(this);
+        jf.add(clearBtn);
 
         jf.setVisible(true);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -148,36 +154,36 @@ public class SwingCalculator implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == sevenBtn){
-            displayLabel.setText("6");
+            displayLabel.setText(displayLabel.getText()+"7");
         }else if(e.getSource() == eightBtn){
-            displayLabel.setText("8");
+            displayLabel.setText(displayLabel.getText()+"8");
             
         }else if(e.getSource() == nineBtn){
-            displayLabel.setText("9");
+            displayLabel.setText(displayLabel.getText()+"9");
             
         }else if(e.getSource() == fourBtn){
-            displayLabel.setText("4");
+            displayLabel.setText(displayLabel.getText()+"4");
             
         }else if(e.getSource() == fiveBtn){
-            displayLabel.setText("5");
+            displayLabel.setText(displayLabel.getText()+"5");
             
         }else if(e.getSource() == sixBtn){
-            displayLabel.setText("6");
+            displayLabel.setText(displayLabel.getText()+"6");
             
         }else if(e.getSource() == oneBtn){
-            displayLabel.setText("1");
+            displayLabel.setText(displayLabel.getText()+"1");
             
         }else if(e.getSource() == twoBtn){
-            displayLabel.setText("2");
+            displayLabel.setText(displayLabel.getText()+"2");
             
         }else if(e.getSource() == threeBtn){
-            displayLabel.setText("3");
+            displayLabel.setText(displayLabel.getText()+"3");
             
         }else if(e.getSource() == dotBtn){
             displayLabel.setText(".");
             
         }else if(e.getSource() == zeroBtn){
-            displayLabel.setText("0");
+            displayLabel.setText(displayLabel.getText()+"0");
             
         }else if(e.getSource() == equalBtn){
             displayLabel.setText("=");
@@ -194,6 +200,8 @@ public class SwingCalculator implements ActionListener{
         }else if(e.getSource() == plusBtn){
             displayLabel.setText("+");
             
+        }else if(e.getSource() == clearBtn){
+            displayLabel.setText("");
         }
         
       }
