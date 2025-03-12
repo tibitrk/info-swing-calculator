@@ -17,12 +17,17 @@ import javax.swing.SwingConstants;
  *
  * @author Tibit
  */
-public class SwingCalculator implements ActionListener{
-    
+public class SwingCalculator implements ActionListener {
+
     JFrame jf;
     JLabel displayLabel;
-    JButton sevenBtn,eightBtn,nineBtn,fourBtn,fiveBtn,sixBtn,oneBtn,twoBtn,threeBtn,dotBtn,zeroBtn,equalBtn,divisionBtn,
-            minusBtn,mulBtn,plusBtn,clearBtn;
+    JButton sevenBtn, eightBtn, nineBtn, fourBtn, fiveBtn, sixBtn, oneBtn, twoBtn, threeBtn, dotBtn, zeroBtn, equalBtn, divisionBtn,
+            minusBtn, mulBtn, plusBtn, clearBtn;
+
+    boolean isOperatedClicked = false;
+    String oldValue;
+    String operator;
+    Float result = 0f;
 
     public SwingCalculator() {
         jf = new JFrame("Calculator");
@@ -40,103 +45,103 @@ public class SwingCalculator implements ActionListener{
 
         sevenBtn = new JButton("7");
         sevenBtn.setBounds(30, 120, 60, 40);
-        sevenBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        sevenBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         sevenBtn.addActionListener(this);
         jf.add(sevenBtn);
 
         eightBtn = new JButton("8");
         eightBtn.setBounds(100, 120, 60, 40);
-        eightBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        eightBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         eightBtn.addActionListener(this);
         jf.add(eightBtn);
 
         nineBtn = new JButton("9");
         nineBtn.setBounds(170, 120, 60, 40);
-        nineBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        nineBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         nineBtn.addActionListener(this);
         jf.add(nineBtn);
 
         fourBtn = new JButton("4");
         fourBtn.setBounds(30, 170, 60, 40);
-        fourBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        fourBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         fourBtn.addActionListener(this);
         jf.add(fourBtn);
 
         fiveBtn = new JButton("5");
         fiveBtn.setBounds(100, 170, 60, 40);
-        fiveBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        fiveBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         fiveBtn.addActionListener(this);
         jf.add(fiveBtn);
 
         sixBtn = new JButton("6");
         sixBtn.setBounds(170, 170, 60, 40);
-        sixBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        sixBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         sixBtn.addActionListener(this);
         jf.add(sixBtn);
 
         oneBtn = new JButton("1");
         oneBtn.setBounds(30, 220, 60, 40);
-        oneBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        oneBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         oneBtn.addActionListener(this);
         jf.add(oneBtn);
 
         twoBtn = new JButton("2");
         twoBtn.setBounds(100, 220, 60, 40);
-        twoBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        twoBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         twoBtn.addActionListener(this);
         jf.add(twoBtn);
 
         threeBtn = new JButton("3");
         threeBtn.setBounds(170, 220, 60, 40);
-        threeBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        threeBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         threeBtn.addActionListener(this);
         jf.add(threeBtn);
 
         dotBtn = new JButton(".");
         dotBtn.setBounds(30, 270, 60, 40);
-        dotBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        dotBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         dotBtn.addActionListener(this);
         jf.add(dotBtn);
 
         zeroBtn = new JButton("0");
         zeroBtn.setBounds(100, 270, 60, 40);
-        zeroBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        zeroBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         zeroBtn.addActionListener(this);
         jf.add(zeroBtn);
 
         equalBtn = new JButton("=");
         equalBtn.setBounds(170, 270, 60, 40);
-        equalBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        equalBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         equalBtn.addActionListener(this);
         jf.add(equalBtn);
 
         divisionBtn = new JButton("/");
         divisionBtn.setBounds(240, 120, 60, 40);
-        divisionBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        divisionBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         divisionBtn.addActionListener(this);
         jf.add(divisionBtn);
 
         mulBtn = new JButton("x");
         mulBtn.setBounds(240, 170, 60, 40);
-        mulBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        mulBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         mulBtn.addActionListener(this);
         jf.add(mulBtn);
 
         minusBtn = new JButton("-");
         minusBtn.setBounds(240, 220, 60, 40);
-        minusBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        minusBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         minusBtn.addActionListener(this);
         jf.add(minusBtn);
 
         plusBtn = new JButton("+");
         plusBtn.setBounds(240, 270, 60, 40);
-        plusBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        plusBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         plusBtn.addActionListener(this);
         jf.add(plusBtn);
-        
+
         clearBtn = new JButton("Clear");
         clearBtn.setBounds(30, 330, 270, 40);
-        clearBtn.setFont(new Font("Arial", Font.PLAIN,25));
+        clearBtn.setFont(new Font("Arial", Font.PLAIN, 25));
         clearBtn.addActionListener(this);
         jf.add(clearBtn);
 
@@ -152,57 +157,131 @@ public class SwingCalculator implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        if(e.getSource() == sevenBtn){
-            displayLabel.setText(displayLabel.getText()+"7");
-        }else if(e.getSource() == eightBtn){
-            displayLabel.setText(displayLabel.getText()+"8");
-            
-        }else if(e.getSource() == nineBtn){
-            displayLabel.setText(displayLabel.getText()+"9");
-            
-        }else if(e.getSource() == fourBtn){
-            displayLabel.setText(displayLabel.getText()+"4");
-            
-        }else if(e.getSource() == fiveBtn){
-            displayLabel.setText(displayLabel.getText()+"5");
-            
-        }else if(e.getSource() == sixBtn){
-            displayLabel.setText(displayLabel.getText()+"6");
-            
-        }else if(e.getSource() == oneBtn){
-            displayLabel.setText(displayLabel.getText()+"1");
-            
-        }else if(e.getSource() == twoBtn){
-            displayLabel.setText(displayLabel.getText()+"2");
-            
-        }else if(e.getSource() == threeBtn){
-            displayLabel.setText(displayLabel.getText()+"3");
-            
-        }else if(e.getSource() == dotBtn){
-            displayLabel.setText(".");
-            
-        }else if(e.getSource() == zeroBtn){
-            displayLabel.setText(displayLabel.getText()+"0");
-            
-        }else if(e.getSource() == equalBtn){
-            displayLabel.setText("=");
-            
-        }else if(e.getSource() == divisionBtn){
-            displayLabel.setText("/");
-            
-        }else if(e.getSource() == mulBtn){
-            displayLabel.setText("x");
-            
-        }else if(e.getSource() == minusBtn){
-            displayLabel.setText("-");
-            
-        }else if(e.getSource() == plusBtn){
-            displayLabel.setText("+");
-            
-        }else if(e.getSource() == clearBtn){
+
+        if (e.getSource() == sevenBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("7");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "7");
+            }
+        } else if (e.getSource() == eightBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("8");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "8");
+            }
+
+        } else if (e.getSource() == nineBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("9");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "9");
+            }
+
+        } else if (e.getSource() == fourBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("4");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "4");
+            }
+
+        } else if (e.getSource() == fiveBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("5");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "5");
+            }
+
+        } else if (e.getSource() == sixBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("6");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "6");
+            }
+        } else if (e.getSource() == oneBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("1");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "1");
+            }
+
+        } else if (e.getSource() == twoBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("2");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "2");
+            }
+
+        } else if (e.getSource() == threeBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("3");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "3");
+            }
+        } else if (e.getSource() == dotBtn) {
+            displayLabel.setText(displayLabel.getText() + ".");
+
+        } else if (e.getSource() == zeroBtn) {
+            if (isOperatedClicked) {
+                displayLabel.setText("0");
+                isOperatedClicked = false;
+            } else {
+                displayLabel.setText(displayLabel.getText() + "0");
+            }
+
+        } else if (e.getSource() == equalBtn) {
+
+            String newValue = displayLabel.getText();
+            Float newValueF = Float.parseFloat(newValue);
+            Float oldValueF = Float.parseFloat(oldValue);
+
+            if (operator.equals("+")) {
+                result = oldValueF + newValueF;
+                displayLabel.setText(result + "");
+            } else if (operator.equals("/")) {
+                if (newValueF != 0) {
+                    result = oldValueF / newValueF;
+                    displayLabel.setText(result + "");
+                } else {
+                    displayLabel.setText("Error");
+                }
+
+            } else if (operator.equals("-")) {
+                result = oldValueF - newValueF;
+                displayLabel.setText(result + "");
+            } else if (operator.equals("x")) {
+                result = oldValueF * newValueF;
+                displayLabel.setText(result + "");
+            }
+
+        } else if (e.getSource() == divisionBtn) {
+            isOperatedClicked = true;
+            oldValue = displayLabel.getText();
+            operator = "/";
+        } else if (e.getSource() == mulBtn) {
+            isOperatedClicked = true;
+            oldValue = displayLabel.getText();
+            operator = "x";
+        } else if (e.getSource() == minusBtn) {
+            isOperatedClicked = true;
+            oldValue = displayLabel.getText();
+            operator = "-";
+        } else if (e.getSource() == plusBtn) {
+            isOperatedClicked = true;
+            oldValue = displayLabel.getText();
+            operator = "+";
+        } else if (e.getSource() == clearBtn) {
             displayLabel.setText("");
         }
-        
-      }
+
+    }
 }
